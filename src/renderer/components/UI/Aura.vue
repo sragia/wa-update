@@ -83,7 +83,7 @@ export default {
   text-overflow: ellipsis;
   padding-left: 10px;
   display: inline-block;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 12px;
   text-shadow: #000000 0 1px 0;
   text-align: left;
@@ -110,7 +110,7 @@ export default {
   content: "@";
 }
 .upgrade-text {
-  font-weight: 600;
+  font-weight: 700;
   text-shadow: #000000 0 1px 0;
   width: 50px;
   display: flex;

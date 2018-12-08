@@ -10,11 +10,9 @@
       <v-button type="menu" @click="configStep = 0">{{
         $t("app.menu.main" /* Main */)
       }}</v-button>
-      <span class="seperator">|</span>
       <v-button type="menu" @click="configStep = 1">{{
         $t("app.menu.settings" /* Settings */)
       }}</v-button>
-      <span class="seperator">|</span>
       <v-button type="menu" @click="configStep = 2">{{
         $t("app.menu.about" /* About */)
       }}</v-button>
@@ -639,7 +637,7 @@ end`
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,400,700&amp;subset=chinese-simplified,cyrillic,japanese,vietnamese");
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Roboto:300');
 
 * {
   box-sizing: border-box;
@@ -648,7 +646,7 @@ end`
   cursor: default;
 }
 body {
-  font-family: 'Noto Sans SC', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   font-weight: 400;
   background-color: #171717;
   color: white;
@@ -716,9 +714,10 @@ footer {
   height: 45px;
 }
 .logos span {
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   font-size: 24px;
-  margin-left: 5px;
+  margin-left: 10px;
   color: rgb(226, 226, 226);
 }
 a {
@@ -726,24 +725,28 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+header {
+  font-size: 0;
+}
 .btn.btn-menu {
   background: transparent;
   color: #f2f2f2;
   padding: 5px 10px;
+  min-width: 80px;
   text-align: center;
   text-shadow: 0 0 1em black;
   width: auto;
   border: none;
-  border-radius: 2px;
-  font-weight: 600;
+  border-radius: 0;
+  font-weight: 700;
   font-size: 14px;
-  margin: 2px;
+  border-right: 1px solid rgba(255, 255, 255, 0.199);
 }
 .btn.btn-menu:hover {
-  background-color: #444;
+  background-color: rgba(255, 255, 255, 0.199);
 }
-.seperator {
-  text-shadow: 0 0 1em black;
+header .btn-menu:last-child {
+  border-right: none;
 }
 .updates {
   color: rgb(255, 209, 0);

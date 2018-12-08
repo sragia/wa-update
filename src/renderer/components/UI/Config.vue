@@ -50,7 +50,9 @@
         type="checkbox"
         v-model="config.ignoreOwnAuras"
       />
-      {{ $t("app.config.ignoreOwnAuras" /* Ignore auras from your account */) }}
+      <label for="ignoreOwnAuras">
+        {{ $t("app.config.ignoreOwnAuras" /* Ignore auras from your account */) }}
+      </label>
     </div>
     <div class="title">
       {{ $t("app.config.clientSettings" /* Client Settings */) }}
@@ -236,7 +238,7 @@ select,
 .title {
   font-size: 25px;
   margin: 25px 0 10px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 4px 5px 4px;
   border-left: 2px solid rgb(255, 209, 0);
   background-color: rgba(0,0,0,.1);
@@ -312,7 +314,7 @@ input[type="checkbox"] + label {
 .subtitle {
   font-size: 18px;
   margin-bottom: 5px;
-  font-weight: 600;
+  font-weight: 700;
   color: white;
 }
 
