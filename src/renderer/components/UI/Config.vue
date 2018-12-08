@@ -1,7 +1,6 @@
 <template>
   <div id="config">
-    <div class="title">
-      {{ $t("app.config.gameSettings" /* Game Settings */) }}
+    <div class="title">{{ $t("app.config.gameSettings" /* Game Settings */) }}
     </div>
     <div class="block">
       <file-select :path.sync="config.wowpath.value"></file-select>
@@ -12,8 +11,7 @@
       />
       <img v-else class="red" :src="require(`@/assets/error.png`)" />
       <span v-if="config.wowpath.valided">
-        <p class="label">
-          {{ $t("app.config.selectAccount" /* Select Account */) }}
+        <p class="label">{{ $t("app.config.selectAccount" /* Select Account */) }}
         </p>
         <select v-model="config.account.value" class="form-control">
           <option v-for="item in config.account.choices" :key="item.name">{{
@@ -28,12 +26,10 @@
         <img v-else class="red" :src="require(`@/assets/error.png`)" />
       </span>
     </div>
-    <div class="title">
-      {{ $t("app.config.wagoSettings" /* Wago Settings */) }}
+    <div class="title">{{ $t("app.config.wagoSettings" /* Wago Settings */) }}
     </div>
     <div class="block">
-      <p class="label">
-        {{ $t("app.config.wagoAccount" /* Wago Account (optional) */) }}
+      <p class="label">{{ $t("app.config.wagoAccount" /* Wago Account (optional) */) }}
       </p>
       <input type="text" v-model="wagoUsername" size="11" />
       <v-button @click="config.wagoUsername = wagoUsername">{{
@@ -50,12 +46,10 @@
         type="checkbox"
         v-model="config.ignoreOwnAuras"
       />
-      <label for="ignoreOwnAuras">
-        {{ $t("app.config.ignoreOwnAuras" /* Ignore auras from your account */) }}
+      <label for="ignoreOwnAuras">{{ $t("app.config.ignoreOwnAuras" /* Ignore auras from your account */) }}
       </label>
     </div>
-    <div class="title">
-      {{ $t("app.config.clientSettings" /* Client Settings */) }}
+    <div class="title">{{ $t("app.config.clientSettings" /* Client Settings */) }}
     </div>
     <div class="block">
       <p class="label">{{ $t("app.config.lang" /* Language */) }}</p>
@@ -68,8 +62,7 @@
         ></option> </select
       ><br /><br />
       <input type="checkbox" id="update-notification" v-model="config.notify" />
-      <label for="update-notification">
-        {{
+      <label for="update-notification">{{
           $t(
             "app.config.notification" /* Receive a notification when auras get updated */
           )
@@ -79,8 +72,7 @@
       <p class="label subtitle">{{ $t("app.config.startup" /* Startup */) }}</p>
       <div class="option">
         <input id="autostart" type="checkbox" v-model="config.autostart" />
-        <label for="autostart">
-          {{
+        <label for="autostart">{{
             $t("app.config.autoStart" /* Launch client with your computer */)
           }}
         </label>
@@ -91,8 +83,7 @@
           type="checkbox"
           v-model="config.startminimize"
         />
-        <label for="startminimize">
-          {{ $t("app.config.minimized" /* Start client minimized */) }}
+        <label for="startminimize">{{ $t("app.config.minimized" /* Start client minimized */) }}
         </label>
       </div>
     </div>
@@ -239,7 +230,7 @@ select,
   font-size: 25px;
   margin: 25px 0 10px;
   font-weight: 700;
-  padding: 4px 5px 4px;
+  padding: 4px 10px 4px;
   border-left: 2px solid rgb(255, 209, 0);
   background-color: rgba(0,0,0,.1);
 }
