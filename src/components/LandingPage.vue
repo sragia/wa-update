@@ -208,7 +208,7 @@ import backupIfRequired from "./libs/backup";
 import {
   isOpen as isWOWOpen,
   afterReload as afterWOWReload,
-  afterRestart as afterWOWRestart
+  afterRestart as afterWOWRestart,
 } from "./libs/wowstat";
 import { wowDefaultPath, matchFolderNameInsensitive } from "./libs/utilities";
 import Button from "./UI/Button.vue";
@@ -248,7 +248,7 @@ const defaultValues = {
       value: "",
       versions: [],
       version: "",
-      valided: false
+      valided: false,
     },
     wagoUsername: null, // ignore your own auras
     wagoApiKey: null,
@@ -265,11 +265,11 @@ const defaultValues = {
       active: true,
       path: path.join(userDataPath, "WeakAurasData-Backup"),
       maxsize: 100,
-      defaultBackupPath: path.join(userDataPath, "WeakAurasData-Backup")
-    }
+      defaultBackupPath: path.join(userDataPath, "WeakAurasData-Backup"),
+    },
   },
   schedule: {
-    id: null // 1h setTimeout id
+    id: null, // 1h setTimeout id
   },
   medias,
   stash: [], // list of auras pushed from wago to wow with "SEND TO WEAKAURAS COMPANION APP" button
@@ -281,12 +281,12 @@ const defaultValues = {
     scheduleId: null, // for 2h auto-updater
     version: null,
     path: null,
-    releaseNotes: null
+    releaseNotes: null,
   },
   isMac: process.platform === "darwin",
   accountOptions: [],
   versionOptions: [],
-  defaultWOWPath: ""
+  defaultWOWPath: "",
 };
 
 export default Vue.extend({
@@ -301,7 +301,7 @@ export default Vue.extend({
     Report,
     Stash,
     Button,
-    Dropdown
+    Dropdown,
   },
   data() {
     return JSON.parse(JSON.stringify(defaultValues));
@@ -316,7 +316,7 @@ export default Vue.extend({
     },
     footerMedias() {
       if (this.medias && this.medias.weakauras) {
-        return this.medias.weakauras.filter(media => media.footer);
+        return this.medias.weakauras.filter((media) => media.footer);
       }
       return [];
     },
@@ -366,7 +366,7 @@ export default Vue.extend({
         this.config.wowpath.version &&
         this.config.wowpath.versions &&
         this.config.wowpath.versions.find(
-          version => version.name === this.config.wowpath.version
+          (version) => version.name === this.config.wowpath.version
         )
       );
     },
@@ -374,7 +374,7 @@ export default Vue.extend({
       return (
         this.versionSelected &&
         this.versionSelected.accounts.find(
-          account => account.name === this.versionSelected.account
+          (account) => account.name === this.versionSelected.account
         )
       );
     },
@@ -391,7 +391,7 @@ export default Vue.extend({
     aurasSorted() {
       return this.auras
         .filter(
-          aura =>
+          (aura) =>
             (!!aura.topLevel || aura.regionType !== "group") &&
             !(
               this.config.ignoreOwnAuras &&
@@ -415,7 +415,7 @@ export default Vue.extend({
     },
     aurasWithData() {
       return this.auras.filter(
-        aura =>
+        (aura) =>
           !!aura.encoded &&
           (!!aura.topLevel || aura.regionType !== "group") &&
           !(
@@ -426,7 +426,7 @@ export default Vue.extend({
     },
     aurasWithUpdate() {
       return this.auras.filter(
-        aura =>
+        (aura) =>
           !!aura.encoded &&
           aura.wagoVersion > aura.version &&
           !aura.ignoreWagoUpdate &&
@@ -463,15 +463,15 @@ export default Vue.extend({
       },
       set(newValue) {
         this.$set(this.accountSelected, "auras", newValue);
-      }
-    }
+      },
+    },
   },
   watch: {
     config: {
       handler() {
         store.set("config", this.config);
       },
-      deep: true
+      deep: true,
     },
     stash: {
       handler() {
@@ -494,9 +494,9 @@ export default Vue.extend({
                       while (this.stash.length > 0) {
                         this.stash.pop();
                       }
-                    }
-                  }
-                ]
+                    },
+                  },
+                ],
               }
             );
 
@@ -520,12 +520,12 @@ export default Vue.extend({
         }
         this.writeAddonData(null, null, true);
       },
-      deep: true
+      deep: true,
     },
     // eslint-disable-next-line func-names
-    "config.wowpath.version": function() {
+    "config.wowpath.version": function () {
       this.buildAccountList();
-    }
+    },
   },
   mounted() {
     this.$electron.ipcRenderer.on(
@@ -582,7 +582,7 @@ export default Vue.extend({
             duration: null,
             onComplete: () => {
               this.updateToast = null;
-            }
+            },
           }
         );
       }
@@ -593,7 +593,7 @@ export default Vue.extend({
           null,
           {
             className: "update update-error",
-            duration: null
+            duration: null,
           }
         );
       }
@@ -615,15 +615,15 @@ export default Vue.extend({
                   onClick: (e, toastObject) => {
                     this.$electron.ipcRenderer.send("installUpdates");
                     toastObject.goAway(0);
-                  }
+                  },
                 },
                 {
                   text: this.$t("app.main.later" /* Later */),
                   onClick: (e, toastObject) => {
                     toastObject.goAway(0);
-                  }
-                }
-              ]
+                  },
+                },
+              ],
             }
           );
         }
@@ -634,7 +634,7 @@ export default Vue.extend({
 
     // set default wow path
     if (!this.config.wowpath.valided) {
-      wowDefaultPath().then(value => {
+      wowDefaultPath().then((value) => {
         this.defaultWOWPath = value;
 
         if (!this.config.wowpath.valided) {
@@ -821,7 +821,7 @@ export default Vue.extend({
       this.config = JSON.parse(JSON.stringify(defaultValues.config));
       this.config.beta = beta;
 
-      wowDefaultPath().then(value => {
+      wowDefaultPath().then((value) => {
         this.config.wowpath.value = value;
         this.validateWowpath();
       });
@@ -862,7 +862,7 @@ export default Vue.extend({
             this.config.wowpath.valided = false;
             this.config.account = null;
 
-            wowDefaultPath().then(value => {
+            wowDefaultPath().then((value) => {
               this.config.wowpath.value = value;
             });
           }
@@ -879,11 +879,11 @@ export default Vue.extend({
           text: this.$t("app.main.close" /* Close */),
           onClick: (e, toastObject) => {
             toastObject.goAway(0);
-          }
-        }
+          },
+        },
       };
 
-      Object.keys(overrideOptions).forEach(key => {
+      Object.keys(overrideOptions).forEach((key) => {
         options[key] = overrideOptions[key];
       });
       let msg;
@@ -1317,14 +1317,15 @@ export default Vue.extend({
         // Make a list of uniqe auras to fetch
         const fetchAuras = this.auras
           .filter(
-            aura =>
+            (aura) =>
+              // !!aura.topLevel &&
               !(
                 this.config.ignoreOwnAuras &&
                 !!aura.author &&
                 aura.author === this.config.wagoUsername
               ) && aura.addonConfig === config
           )
-          .map(aura => aura.slug);
+          .map((aura) => aura.slug);
 
         // Test if list is empty
         if (fetchAuras.length === 0) {
@@ -1466,7 +1467,7 @@ export default Vue.extend({
             .all(promisesResolved)
             .then(
               this.$http.spread((...args) => {
-                args.forEach(arg => {
+                args.forEach((arg) => {
                   const { id } = arg.config.params;
 
                   if (arg.status === 200) {
@@ -1477,7 +1478,7 @@ export default Vue.extend({
                       }
                     });
                   } else {
-                    this.auras.forEach(aura => {
+                    this.auras.forEach((aura) => {
                       if (aura.wagoid === id) {
                         this.message(
                           [
@@ -1604,10 +1605,10 @@ export default Vue.extend({
           "author",
           "encoded",
           "wagoVersion",
-          "wagoSemver"
+          "wagoSemver",
         ];
 
-        addonConfigs.forEach(config => {
+        addonConfigs.forEach((config) => {
           addonDepts += config.addonName + ",";
 
           let spacing = "";
@@ -1732,7 +1733,7 @@ export default Vue.extend({
 ## OptionalDeps: ${addonDepts}
 
 data.lua
-init.lua`
+init.lua`,
           },
           {
             name: "init.lua",
@@ -1775,22 +1776,22 @@ end
 
 if Plater and Plater.CheckWagoUpdates then
     Plater.CheckWagoUpdates()
-end`
+end`,
           },
           {
             name: "data.lua",
-            data: LuaOutput
-          }
+            data: LuaOutput,
+          },
         ];
 
-        files.forEach(file => {
+        files.forEach((file) => {
           let filepath = path.join(AddonFolder, file.name);
 
           if (!fs.existsSync(filepath)) {
             newInstall = true;
           }
 
-          fs.writeFile(filepath, file.data, err2 => {
+          fs.writeFile(filepath, file.data, (err2) => {
             if (err2) {
               this.message(
                 this.$t(
@@ -1821,7 +1822,7 @@ end`
                 duration: null,
                 onComplete: () => {
                   this.reloadToast = null;
-                }
+                },
               }
             );
 
@@ -1875,7 +1876,7 @@ end`
                 duration: null,
                 onComplete: () => {
                   this.reloadToast = null;
-                }
+                },
               }
             );
 
@@ -1906,7 +1907,7 @@ end`
             icon: path.join(
               __static,
               process.platform === "win32" ? "bigicon.png" : "icon.png"
-            )
+            ),
           }
         );
 
@@ -1927,7 +1928,7 @@ end`
             this.config.backup,
             account.savedvariableSize,
             `${version.name}#${account.name}`,
-            fileSize => {
+            (fileSize) => {
               this.config.wowpath.versions[versionindex].accounts[
                 accountindex
               ].savedvariableSize = fileSize;
@@ -1945,7 +1946,7 @@ end`
         const DataFolder = path.join(wowpath, "Data");
 
         // test if ${wowpath}\Data exists
-        fs.access(DataFolder, fs.constants.F_OK, err => {
+        fs.access(DataFolder, fs.constants.F_OK, (err) => {
           if (!err) {
             fs.readdir(wowpath, (err2, files) => {
               if (err2) {
@@ -1955,11 +1956,11 @@ end`
 
                 files
                   .filter(
-                    versionDir =>
+                    (versionDir) =>
                       versionDir.match(/^_.*_$/) &&
                       fs.statSync(path.join(wowpath, versionDir)).isDirectory()
                   )
-                  .forEach(versionDir => {
+                  .forEach((versionDir) => {
                     if (!validated) {
                       const accountFolder = path.join(
                         wowpath,
@@ -1995,24 +1996,24 @@ end`
       const versionLabels = [
         {
           value: "_retail_",
-          text: this.$t("app.version.retail" /* Retail */)
+          text: this.$t("app.version.retail" /* Retail */),
         },
         {
           value: "_ptr_",
-          text: this.$t("app.version.ptr" /* PTR */)
+          text: this.$t("app.version.ptr" /* PTR */),
         },
         {
           value: "_classic_beta_",
-          text: this.$t("app.version.classicbeta" /* Classic Beta */)
+          text: this.$t("app.version.classicbeta" /* Classic Beta */),
         },
         {
           value: "_classic_ptr_",
-          text: this.$t("app.version.classicptr" /* Classic PTR */)
+          text: this.$t("app.version.classicptr" /* Classic PTR */),
         },
         {
           value: "_classic_",
-          text: this.$t("app.version.classic" /* Classic */)
-        }
+          text: this.$t("app.version.classic" /* Classic */),
+        },
       ];
 
       if (this.config.wowpath.valided) {
@@ -2024,11 +2025,11 @@ end`
           } else {
             files
               .filter(
-                versionDir =>
+                (versionDir) =>
                   versionDir.match(/^_.*_$/) &&
                   fs.statSync(path.join(wowpath, versionDir)).isDirectory()
               )
-              .forEach(versionDir => {
+              .forEach((versionDir) => {
                 const accountFolder = path.join(
                   wowpath,
                   versionDir,
@@ -2036,12 +2037,12 @@ end`
                   "Account"
                 );
 
-                fs.access(accountFolder, fs.constants.F_OK, err2 => {
+                fs.access(accountFolder, fs.constants.F_OK, (err2) => {
                   if (err2) {
                     console.log(`Error: ${err2}`);
                   } else {
                     const versionFound = this.config.wowpath.versions.find(
-                      version => version.name === versionDir
+                      (version) => version.name === versionDir
                     );
 
                     if (!versionFound) {
@@ -2049,17 +2050,17 @@ end`
                       this.config.wowpath.versions.push({
                         name: versionDir,
                         accounts: [],
-                        account: ""
+                        account: "",
                       });
                     }
 
                     const label = versionLabels.find(
-                      versionLabel => versionLabel.value === versionDir
+                      (versionLabel) => versionLabel.value === versionDir
                     );
 
                     this.versionOptions.push({
                       value: versionDir,
-                      text: (label && label.text) || versionDir
+                      text: (label && label.text) || versionDir,
                     });
                   }
                 });
@@ -2087,15 +2088,15 @@ end`
           } else {
             files
               .filter(
-                accountFile =>
+                (accountFile) =>
                   accountFile !== "SavedVariables" &&
                   fs
                     .statSync(path.join(accountFolder, accountFile))
                     .isDirectory()
               )
-              .forEach(accountFile => {
+              .forEach((accountFile) => {
                 const accountFound = this.versionSelected.accounts.find(
-                  account => account.name === accountFile
+                  (account) => account.name === accountFile
                 );
 
                 if (!accountFound) {
@@ -2104,7 +2105,7 @@ end`
                     name: accountFile,
                     lastWagoUpdate: null,
                     auras: [],
-                    savedvariableSize: null
+                    savedvariableSize: null,
                   });
                 } else if (
                   typeof accountFound.savedvariableSize === "undefined"
@@ -2113,14 +2114,14 @@ end`
 
                 this.accountOptions.push({
                   value: accountFile,
-                  text: accountFile
+                  text: accountFile,
                 });
               });
           }
         });
       }
-    }
-  }
+    },
+  },
 });
 </script>
 

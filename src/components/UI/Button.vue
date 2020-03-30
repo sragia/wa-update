@@ -11,7 +11,7 @@
       { 'btn-issue': type == 'issue' },
       { 'btn-reset': type == 'reset' },
       { 'btn-link': type == 'link' },
-      { 'btn-addon': type == 'addon' }
+      { 'btn-addon': type == 'addon' },
     ]"
     :title="title"
     @click="callback($event)"
@@ -26,8 +26,8 @@ export default {
   methods: {
     callback(e) {
       this.$emit("click", e);
-    }
-  }
+    },
+  },
 };
 </script>
 
