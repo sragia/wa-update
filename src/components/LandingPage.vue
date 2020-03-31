@@ -67,6 +67,7 @@
         >
           <label
             :key="addonSelected"
+            class="btn-label"
             style="
               cursor: default;
               color: #eee;
@@ -77,7 +78,6 @@
           >
             {{ $t("app.main.addons" /* Addons */) }}
           </label>
-          <br />
           <Button
             v-for="(addon, index) in allAddonConfigs"
             :key="index"
@@ -2189,10 +2189,14 @@ end`,
 #addonbttns {
   position: absolute;
   left: 20px;
-  top: 35px;
+  top: 30px;
   z-index: 999;
   text-align: left;
   height: 65px;
+}
+.btn-label {
+  display: block;
+  margin-bottom: 5px;
 }
 
 /* WoW Version & Account selection */
