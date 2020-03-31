@@ -122,9 +122,8 @@ export default {
   color: #1a1a1a;
 }
 .btn-addon:disabled {
-  background-color: #777;
-  color: #580909;
-  border-color: #580909;
+  background-color: rgba(36, 36, 36, 0.95);
+  color: #6e6e6e;
   cursor: default;
 }
 .btn-menu {

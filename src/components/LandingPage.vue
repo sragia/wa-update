@@ -72,7 +72,6 @@
               cursor: default;
               color: #eee;
               font-size: 15px;
-              font-family: 'Montserrat', sans-serif;
               font-weight: 500;
             "
           >
@@ -2188,7 +2187,7 @@ end`,
 /* WoW addon selection */
 #addonbttns {
   position: absolute;
-  left: 20px;
+  left: 30px;
   top: 30px;
   z-index: 999;
   text-align: left;
